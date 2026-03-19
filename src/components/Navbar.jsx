@@ -31,7 +31,7 @@ export const Navbar = () => {
         )}
       >
         <a className="text-xl font-bold tracking-tight" href="#hero">
-          Mansi<span className="text-primary">.</span>
+          Mansi<span className="text-primary"></span>
         </a>
 
         {/* desktop nav */}
