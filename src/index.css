@@ -1,0 +1,283 @@
+@import "tailwindcss";
+@variant dark (&:where(.dark, .dark *)); 
+
+@theme {
+  /* THIS SETS "OUTFIT" AS THE GLOBAL FONT FOR THE WHOLE SITE */
+  --font-sans: "Outfit", sans-serif;
+
+  --color-border: hsl(var(--border));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-card: hsl(var(--card));
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.7s ease-out forwards;
+  --animate-fade-in-delay-1: fade-in 0.7s ease-out 0.2s forwards;
+  --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
+  --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
+  --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
+  --animate-meteor: meteor 5s linear infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes meteor {
+    0% {
+      transform: rotate(215deg) translateX(0);
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(215deg) translateX(-500px);
+      opacity: 0;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    /* LIGHT MODE: Mansi's Violet & Plum Theme */
+    --background: 260 20% 99%; 
+    --foreground: 260 50% 15%; /* Deep Plum/Indigo text */
+
+    --card: 0 0% 100%;
+
+    --primary: 262 83% 58%; /* Vibrant Violet */
+    --primary-foreground: 0 0% 100%;
+
+    --border: 260 20% 90%;
+    --muted-foreground: 260 20% 45%; /* Soft grayish purple for subtitles */
+  }
+
+  .dark {
+    /* DARK MODE: Mansi's Deep Violet Theme */
+    --background: 260 60% 5%; /* Very deep indigo background */
+    --foreground: 260 20% 95%; /* Soft Lavender text */
+
+    --card: 260 50% 8%; /* Tinted dark glass card */
+
+    --primary: 262 83% 58%; /* Vibrant Violet */
+    --primary-foreground: 0 0% 100%;
+
+    --border: 260 30% 20%; /* Soft purple border */
+    --muted-foreground: 260 20% 70%; /* Dim lavender for subtitles */
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-family: var(--font-sans);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased; /* Makes the font look premium and thin */
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+
+  @media (width >= 640px) {
+    max-width: 640px;
+  }
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@utility text-glow {
+  @apply relative;
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.5); /* Updated to violet glow */
+}
+
+@utility card-hover {
+  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+}
+
+@utility gradient-border {
+  @apply relative rounded-md;
+  background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
+  background-clip: padding-box;
+  border: 1px solid transparent;
+}
+
+@utility cosmic-button {
+  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium 
+         transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]
+         hover:scale-105 active:scale-95;
+}
+
+@utility star {
+  @apply absolute rounded-full bg-white;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+}
+
+@utility meteor {
+  @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+/* --- Sunny bokeh blobs --- */
+.sun-bokeh{
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(196, 181, 253, 0.55),
+    rgba(196, 181, 253, 0.0) 70%
+  );
+  filter: blur(10px);
+  opacity: 0.6;
+}
+
+@keyframes bokehSlow {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(28px,-24px,0) scale(1.08); }
+}
+@keyframes bokehMid {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(-34px,-18px,0) scale(1.10); }
+}
+@keyframes bokehFast {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(18px,-40px,0) scale(1.12); }
+}
+
+.animate-bokehSlow { animation: bokehSlow 14s ease-in-out infinite; }
+.animate-bokehMid  { animation: bokehMid 11s ease-in-out infinite; }
+.animate-bokehFast { animation: bokehFast 9s ease-in-out infinite; }
+
+@keyframes sunFloat {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(18px, 10px, 0) scale(1.03); }
+}
+.animate-sunFloat { animation: sunFloat 10s ease-in-out infinite; }
+
+@keyframes raysSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-raysSpin { animation: raysSpin 32s linear infinite; }
+
+/* --- Sunny sparkles --- */
+.sun-particle{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(255, 214, 102, 0.95),
+    rgba(255, 214, 102, 0.0) 70%
+  );
+  box-shadow: 0 0 18px rgba(255, 214, 102, 0.45);
+  opacity: 0.9;
+  filter: blur(0.2px);
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translate3d(0,0,0); opacity: 0.75; }
+  50% { transform: translate3d(18px,-22px,0); opacity: 1; }
+}
+@keyframes floatMid {
+  0%, 100% { transform: translate3d(0,0,0); opacity: 0.65; }
+  50% { transform: translate3d(-22px,-14px,0); opacity: 1; }
+}
+@keyframes floatFast {
+  0%, 100% { transform: translate3d(0,0,0); opacity: 0.65; }
+  50% { transform: translate3d(14px,-30px,0); opacity: 1; }
+}
+
+.animate-floatSlow { animation: floatSlow 9s ease-in-out infinite; }
+.animate-floatMid  { animation: floatMid 7.5s ease-in-out infinite; }
+.animate-floatFast { animation: floatFast 6.2s ease-in-out infinite; }
+
+/* --- Sun Meteor Rays --- */
+@keyframes sun-meteor-strike {
+  0% {
+    transform: rotate(var(--angle)) translateX(100px);
+    width: 0px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  40% {
+    width: 200px;
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--angle)) translateX(1200px);
+    width: 0px;
+    opacity: 0;
+  }
+}
+
+.sun-meteor {
+  position: absolute;
+  top: 80px; 
+  left: 80px;
+  height: 5px;
+  background: linear-gradient(to right, #ffffff, rgba(255, 214, 102, 1), transparent);
+  border-radius: 999px;
+  transform-origin: left center;
+  box-shadow: 0 0 15px 3px rgba(255, 214, 102, 0.6);
+  animation: sun-meteor-strike var(--duration) ease-in infinite;
+  animation-delay: var(--delay);
+  opacity: 0; 
+}
