@@ -18,7 +18,7 @@ const projects = [
     liveUrl: "#",
     videoUrl: "#",
     codeUrl: "https://github.com/Ivan-here/Capstone-Project.git",
-    docsUrl: "https://drive.google.com/drive/folders/1a8QOjFa8YVds4-JfVqb1t8gHhPl6J1_h?usp=sharing",
+    docsUrl: "https://drive.google.com/drive/folders/https://drive.google.com/drive/folders/18ags5in7Br-m-oBb2CdpYZ1rTnaFh4_x?usp=sharing-JfVqb1t8gHhPl6J1_h?usp=sharing",
     figmaUrl: "https://www.figma.com/design/4Wh2n47oWLlFx35L0ef9ak/Local-Food-Service-App-Mockups?node-id=0-1&t=HP0Jn16GJ3Dngt0j-1",
     inProgress: true,
   },
